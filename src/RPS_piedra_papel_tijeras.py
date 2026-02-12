@@ -4,21 +4,21 @@ from enum import IntEnum
 
 class GameAction(IntEnum):
 
-    Rock = 0
-    Paper = 1
-    Scissors = 2
+    ROCK = 0
+    PAPER = 1
+    SCISSORS = 2
 
 
 class GameResult(IntEnum):
-    Victory = 0
-    Defeat = 1
-    Tie = 2
+    VICTORY = 0
+    DEFEAT = 1
+    TIE = 2
 
 
 Victories = {
-    GameAction.Rock: GameAction.Paper,
-    GameAction.Paper: GameAction.Scissors,
-    GameAction.Scissors: GameAction.Rock
+    GameAction.ROCK: GameAction.PAPER,
+    GameAction.PAPER: GameAction.SCISSORS,
+    GameAction.SCISSORS: GameAction.ROCK
 }
 
 class Game:
@@ -29,34 +29,34 @@ class Game:
 
         if user_action == computer_action:
             print(f"User and computer picked {user_action.name}. Draw game!")
-            game_result = GameResult.Tie
+            game_result = GameResult.TIE
 
-        # You picked Rock
-        elif user_action == GameAction.Rock:
-            if computer_action == GameAction.Scissors:
-                print("Rock smashes scissors. You won!")
-                game_result = GameResult.Victory
+        # You picked ROCK
+        elif user_action == GameAction.ROCK:
+            if computer_action == GameAction.SCISSORS:
+                print("ROCK smashes SCISSORS. You won!")
+                game_result = GameResult.VICTORY
             else:
-                print("Paper covers rock. You lost!")
-                game_result = GameResult.Defeat
+                print("PAPER covers ROCK. You lost!")
+                game_result = GameResult.DEFEAT
 
-        # You picked Paper
-        elif user_action == GameAction.Paper:
-            if computer_action == GameAction.Rock:
-                print("Paper covers rock. You won!")
-                game_result = GameResult.Victory
+        # You picked PAPER
+        elif user_action == GameAction.PAPER:
+            if computer_action == GameAction.ROCK:
+                print("PAPER covers ROCK. You won!")
+                game_result = GameResult.VICTORY
             else:
-                print("Scissors cuts paper. You lost!")
-                game_result = GameResult.Defeat
+                print("SCISSORS cuts PAPER. You lost!")
+                game_result = GameResult.DEFEAT
 
-        # You picked Scissors
-        elif user_action == GameAction.Scissors:
-            if computer_action == GameAction.Rock:
-                print("Rock smashes scissors. You lost!")
-                game_result = GameResult.Defeat
+        # You picked SCISSORS
+        elif user_action == GameAction.SCISSORS:
+            if computer_action == GameAction.ROCK:
+                print("ROCK smashes SCISSORS. You lost!")
+                game_result = GameResult.DEFEAT
             else:
-                print("Scissors cuts paper. You won!")
-                game_result = GameResult.Victory
+                print("SCISSORS cuts PAPER. You won!")
+                game_result = GameResult.VICTORY
 
         return game_result
 
@@ -70,7 +70,7 @@ class Game:
 
 
     def get_user_action():
-        # Scalable to more options (beyond rock, paper and scissors...)
+        # Scalable to more options (beyond ROCK, PAPER and SCISSORS...)
         game_choices = [f"{game_action.name}[{game_action.value}]" for game_action in GameAction]
         game_choices_str = ", ".join(game_choices)
         user_selection = int(input(f"\nPick a choice ({game_choices_str}): "))
