@@ -7,7 +7,8 @@ class GameAction(IntEnum):
     ROCK = 0
     PAPER = 1
     SCISSORS = 2
-
+    LIZARD = 3
+    SPOCK = 4
 
 class GameResult(IntEnum):
     VICTORY = 0
@@ -15,11 +16,23 @@ class GameResult(IntEnum):
     TIE = 2
 
 
-Victories = {
-    GameAction.ROCK: GameAction.PAPER,
-    GameAction.PAPER: GameAction.SCISSORS,
-    GameAction.SCISSORS: GameAction.ROCK
-}
+victories = {
+            GameAction.ROCK:(
+                GameAction.SCISSORS, GameAction.LIZARD
+            ),
+            GameAction.PAPER:(
+                GameAction.SPOCK, GameAction.ROCK
+            ),
+            GameAction.SCISSORS:(
+                GameAction.PAPER, GameAction.LIZARD
+            ),
+            GameAction.SPOCK:(
+                GameAction.SCISSORS, GameAction.ROCK
+            ),
+            GameAction.LIZARD:(
+                GameAction.SPOCK, GameAction.PAPER
+            ),
+        }
 
 class Game:
 
@@ -27,36 +40,15 @@ class Game:
 
         game_result = None
 
-        if user_action == computer_action:
-            print(f"User and computer picked {user_action.name}. Draw game!")
+        if computer_action == user_action:
+            print("tie")
             game_result = GameResult.TIE
-
-        # You picked ROCK
-        elif user_action == GameAction.ROCK:
-            if computer_action == GameAction.SCISSORS:
-                print("ROCK smashes SCISSORS. You won!")
-                game_result = GameResult.VICTORY
-            else:
-                print("PAPER covers ROCK. You lost!")
-                game_result = GameResult.DEFEAT
-
-        # You picked PAPER
-        elif user_action == GameAction.PAPER:
-            if computer_action == GameAction.ROCK:
-                print("PAPER covers ROCK. You won!")
-                game_result = GameResult.VICTORY
-            else:
-                print("SCISSORS cuts PAPER. You lost!")
-                game_result = GameResult.DEFEAT
-
-        # You picked SCISSORS
-        elif user_action == GameAction.SCISSORS:
-            if computer_action == GameAction.ROCK:
-                print("ROCK smashes SCISSORS. You lost!")
-                game_result = GameResult.DEFEAT
-            else:
-                print("SCISSORS cuts PAPER. You won!")
-                game_result = GameResult.VICTORY
+        elif computer_action in victories[user_action]:
+            print("lol you win")
+            game_result = GameResult.DEFEAT
+        else:
+            print("you lost")
+            game_result = GameResult.VICTORY
 
         return game_result
 
