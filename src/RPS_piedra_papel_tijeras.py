@@ -45,10 +45,10 @@ class Game:
             game_result = GameResult.TIE
         elif computer_action in victories[user_action]:
             print("lol you win")
-            game_result = GameResult.DEFEAT
+            game_result = GameResult.VICTORY
         else:
             print("you lost")
-            game_result = GameResult.VICTORY
+            game_result = GameResult.DEFEAT
 
         return game_result
 
